@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kopano Madisa — Body of Work</title>
+  <meta name="description" content="Body of Work — an art portfolio by Kopano Madisa. Mixed media, photography and digital posters exploring identity and heritage." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1714'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' fill='%23f5f2ec' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ===== Grain / texture overlay ===== -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header" id="top">
+    <a class="brand" href="#top">
+      <span class="brand-mark">KM</span>
+      <span class="brand-text">Kopano&nbsp;Madisa</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#morwadiwa">Morwadiwa</a>
+      <a href="#artist">Artist</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cta" href="assets/pdf/Body-of-Work-Kopano-Madisa.pdf" target="_blank" rel="noopener">Portfolio&nbsp;PDF</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-inner">
+      <p class="hero-eyebrow reveal">Art Portfolio</p>
+      <h1 class="hero-title">
+        <span class="line reveal">Body</span>
+        <span class="line reveal">of <em>Work</em></span>
+      </h1>
+      <p class="hero-name reveal">Kopano&nbsp;Madisa</p>
+      <p class="hero-sub reveal">
+        A collection of mixed media, photography and digital posters — a body of work
+        in alignment with identity &amp; heritage.
+      </p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-solid" href="#work">View the work</a>
+        <a class="btn btn-ghost" href="#morwadiwa">The Morwadiwa series</a>
+      </div>
+    </div>
+    <div class="hero-scroll reveal" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ===== Marquee statement ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Mixed Media</span><span class="dot">✦</span>
+      <span>Photography</span><span class="dot">✦</span>
+      <span>Identity</span><span class="dot">✦</span>
+      <span>Heritage</span><span class="dot">✦</span>
+      <span>Digital Poster</span><span class="dot">✦</span>
+      <span>Mixed Media</span><span class="dot">✦</span>
+      <span>Photography</span><span class="dot">✦</span>
+      <span>Identity</span><span class="dot">✦</span>
+      <span>Heritage</span><span class="dot">✦</span>
+      <span>Digital Poster</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ===== Work / Gallery ===== -->
+  <main id="work" class="work">
+    <div class="section-head reveal">
+      <p class="section-index">01 — The Collection</p>
+      <h2 class="section-title">Selected Works</h2>
+      <p class="section-lede">
+        Seventeen pieces drawn from the artist's body of work — spanning canvas,
+        photographic prints and digital poster design.
+      </p>
+    </div>
+
+    <div class="filters reveal" role="tablist" aria-label="Filter works">
+      <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">All Works</button>
+      <button class="filter" data-filter="pieces" role="tab" aria-selected="false">Art Pieces</button>
+      <button class="filter" data-filter="morwadiwa" role="tab" aria-selected="false">Morwadiwa</button>
+      <button class="filter" data-filter="poster" role="tab" aria-selected="false">Digital Posters</button>
+    </div>
+
+    <div class="gallery" id="gallery" aria-live="polite">
+      <!-- gallery items injected by js/main.js -->
+    </div>
+  </main>
+
+  <!-- ===== Morwadiwa feature band ===== -->
+  <section id="morwadiwa" class="feature">
+    <div class="feature-inner">
+      <p class="section-index reveal">02 — The Series</p>
+      <h2 class="feature-title reveal">Morwadiwa</h2>
+      <p class="feature-sub reveal">
+        One body of work in alignment<br />with identity &amp; heritage.
+      </p>
+      <p class="feature-body reveal">
+        Photography and mixed media on A2 — a suite of works that trace lineage,
+        memory and selfhood. Named for the artist's matrilineal heritage, the series
+        holds the past and the present in the same frame.
+      </p>
+      <a class="btn btn-ghost light reveal" href="#work" data-jump="morwadiwa">Explore the series</a>
+    </div>
+  </section>
+
+  <!-- ===== Artist ===== -->
+  <section id="artist" class="artist">
+    <div class="artist-grid">
+      <div class="artist-media reveal">
+        <img src="assets/art/morwadiwa-06.jpg" alt="A work from the Morwadiwa series by Kopano Madisa" loading="lazy" />
+        <span class="artist-media-caption">Morwadiwa — detail, 2025</span>
+      </div>
+      <div class="artist-copy">
+        <p class="section-index reveal">03 — The Artist</p>
+        <h2 class="section-title reveal">Kopano Madisa</h2>
+        <p class="reveal">
+          Kopano Madisa works across mixed media, photography and digital design.
+          Their practice is rooted in identity and heritage — exploring how the self
+          is carried, altered and remembered across generations.
+        </p>
+        <p class="reveal">
+          This body of work gathers pieces made between 2021 and 2025, from early
+          A4 mixed-media studies to a completed A2 photographic series and a pair of
+          digital posters titled <em>Morwadiwa Madisa</em>.
+        </p>
+        <dl class="artist-stats reveal">
+          <div><dt>17</dt><dd>Works on show</dd></div>
+          <div><dt>3</dt><dd>Collections</dd></div>
+          <div><dt>2021–25</dt><dd>Years of practice</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact / Footer ===== -->
+  <footer id="contact" class="site-footer">
+    <div class="footer-inner">
+      <p class="section-index reveal">04 — Enquiries</p>
+      <h2 class="footer-title reveal">Let's talk about the work.</h2>
+      <a class="footer-mail reveal" href="mailto:hello@kopanomadisa.art">hello@kopanomadisa.art</a>
+      <div class="footer-actions reveal">
+        <a class="btn btn-solid" href="assets/pdf/Body-of-Work-Kopano-Madisa.pdf" target="_blank" rel="noopener">Download portfolio (PDF)</a>
+      </div>
+      <div class="footer-meta">
+        <span>Body of Work — Kopano Madisa</span>
+        <span>Mixed Media · Photography · Digital</span>
+        <span>&copy; <span id="year"></span> All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Lightbox ===== -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Artwork viewer">
+    <button class="lb-close" aria-label="Close viewer">&times;</button>
+    <button class="lb-nav lb-prev" aria-label="Previous work">&#8249;</button>
+    <button class="lb-nav lb-next" aria-label="Next work">&#8250;</button>
+    <figure class="lb-figure">
+      <img class="lb-img" id="lbImg" src="" alt="" />
+      <figcaption class="lb-caption">
+        <span class="lb-title" id="lbTitle"></span>
+        <span class="lb-meta" id="lbMeta"></span>
+        <span class="lb-count" id="lbCount"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
