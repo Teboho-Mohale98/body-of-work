@@ -11,6 +11,7 @@ const WORK = [
   { file: 'art-03.jpg', cat: 'pieces', title: 'Untitled', medium: 'Mixed Medium', dims: 'A4', year: '2025' },
   { file: 'art-04.jpg', cat: 'pieces', title: 'Untitled', medium: 'Mixed Medium', dims: 'A4', year: '2025' },
   { file: 'art-05.jpg', cat: 'pieces', title: 'Untitled', medium: 'Mixed Medium', dims: 'A4', year: '2025' },
+  { file: 'art-06.jpg', cat: 'pieces', title: 'Untitled', medium: 'Mixed Medium', dims: 'A4', year: '2025' },
 
   /* --- Morwadiwa · Photography / Mixed Medium · A2 --- */
   { file: 'morwadiwa-01.jpg', cat: 'morwadiwa', title: 'Untitled', medium: 'Photography', dims: 'A2', year: '2025' },
