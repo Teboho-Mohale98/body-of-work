@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teboho-mohale98.github.io/body-of-work/sitemap.xml
