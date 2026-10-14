@@ -284,12 +284,14 @@ document.getElementById('lbPrev').addEventListener('click', () => step(-1));
 document.getElementById('lbNext').addEventListener('click', () => step(1));
 lbFav.addEventListener('click', () => toggleFav(currentWork().file));
 lbZoom.addEventListener('click', (e) => { e.stopPropagation(); zoomed ? disableZoom() : enableZoom(); });
-lbImg.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (zoomed) { disableZoom(); } else { enableZoom(); panZoom(e); }
-});
-lb.addEventListener('mousemove', (e) => { if (zoomed) panZoom(e); });
 lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+
+/* zoom / pan gestures — mouse, touch and pen */
+lbImg.addEventListener('pointerdown', onPointerDown);
+lbImg.addEventListener('pointermove', onPointerMove);
+lbImg.addEventListener('pointerup', onPointerUp);
+lbImg.addEventListener('pointercancel', onPointerUp);
+lbImg.addEventListener('wheel', onWheel, { passive: false });
 
 document.addEventListener('keydown', (e) => {
   if (!lb.classList.contains('open')) return;
@@ -298,29 +300,87 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') step(1);
 });
 
-/* ---------- Zoom / pan ---------- */
-const Z = 1.9;
-let zoomed = false, baseCx = 0, baseCy = 0;
-function enableZoom() {
+/* ---------- Zoom / pan (mouse, touch, pen) ---------- */
+const Z_DEFAULT = 1.9, Z_MIN = 1, Z_MAX = 3.4;
+let zoomed = false, scale = 1, tx = 0, ty = 0, baseCx = 0, baseCy = 0;
+const pointers = new Map();
+let pinchDist = 0, pinchScale = 1, startX = 0, startY = 0, moved = false;
+
+function applyTransform() { lbImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`; }
+function captureBase() {
   const r = lbImg.getBoundingClientRect();
   baseCx = r.left + r.width / 2;
   baseCy = r.top + r.height / 2;
-  zoomed = true;
+}
+function enableZoom() {
+  captureBase();
+  zoomed = true; scale = Z_DEFAULT; tx = 0; ty = 0;
   lbImg.classList.add('zoomed');
-  lbZoom.setAttribute('aria-pressed', 'true');
-  lbZoom.classList.add('is-on');
+  lbZoom.classList.add('is-on'); lbZoom.setAttribute('aria-pressed', 'true');
+  applyTransform();
 }
 function disableZoom() {
-  zoomed = false;
-  lbImg.classList.remove('zoomed');
-  lbImg.style.transform = '';
-  lbZoom.setAttribute('aria-pressed', 'false');
-  lbZoom.classList.remove('is-on');
+  zoomed = false; scale = 1; tx = 0; ty = 0;
+  pointers.clear(); pinchDist = 0;
+  lbImg.classList.remove('zoomed'); lbImg.style.transform = '';
+  lbZoom.classList.remove('is-on'); lbZoom.setAttribute('aria-pressed', 'false');
 }
-function panZoom(e) {
-  const dx = e.clientX - baseCx;
-  const dy = e.clientY - baseCy;
-  lbImg.style.transform = `translate(${-dx * (Z - 1)}px, ${-dy * (Z - 1)}px) scale(${Z})`;
+function panZoom(x, y) {
+  if (!zoomed) return;
+  tx = -(x - baseCx) * (scale - 1);
+  ty = -(y - baseCy) * (scale - 1);
+  applyTransform();
+}
+function pinchZoom(next, fx, fy) {
+  const clamped = Math.max(Z_MIN, Math.min(Z_MAX, next));
+  if (clamped <= 1.01) { disableZoom(); return; }
+  if (!zoomed) {
+    captureBase(); zoomed = true; lbImg.classList.add('zoomed');
+    lbZoom.classList.add('is-on'); lbZoom.setAttribute('aria-pressed', 'true');
+  }
+  scale = clamped;
+  tx = -(fx - baseCx) * (scale - 1);
+  ty = -(fy - baseCy) * (scale - 1);
+  applyTransform();
+}
+
+function onPointerDown(e) {
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  startX = e.clientX; startY = e.clientY; moved = false;
+  if (pointers.size === 2) {
+    const [a, b] = [...pointers.values()];
+    pinchDist = Math.hypot(a.x - b.x, a.y - b.y);
+    pinchScale = zoomed ? scale : 1;
+  } else {
+    try { lbImg.setPointerCapture(e.pointerId); } catch (err) {}
+  }
+}
+function onPointerMove(e) {
+  if (!pointers.has(e.pointerId)) return;
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (Math.hypot(e.clientX - startX, e.clientY - startY) > 8) moved = true;
+
+  if (pointers.size >= 2) {
+    const [a, b] = [...pointers.values()];
+    const dist = Math.hypot(a.x - b.x, a.y - b.y);
+    const midX = (a.x + b.x) / 2, midY = (a.y + b.y) / 2;
+    if (pinchDist > 0) pinchZoom(pinchScale * (dist / pinchDist), midX, midY);
+    moved = true;
+    e.preventDefault();
+  } else if (zoomed) {
+    panZoom(e.clientX, e.clientY);
+    moved = true;
+  }
+}
+function onPointerUp(e) {
+  const had = pointers.size;
+  pointers.delete(e.pointerId);
+  if (pointers.size < 2) pinchDist = 0;
+  if (had === 1 && !moved) { zoomed ? disableZoom() : enableZoom(); }
+}
+function onWheel(e) {
+  e.preventDefault();
+  pinchZoom((zoomed ? scale : 1) * (e.deltaY < 0 ? 1.15 : 0.87), e.clientX, e.clientY);
 }
 
 /* ---------- Slideshow ---------- */

@@ -387,7 +387,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rota
 .lb-img {
   max-width: 100%; max-height: 74vh; width: auto; object-fit: contain;
   box-shadow: 0 40px 90px -30px rgba(0,0,0,.8);
-  background: #1c1815; cursor: zoom-in;
+  background: #1c1815; cursor: zoom-in; touch-action: none;
   transition: transform .45s var(--ease);
 }
 .lb-img.zoomed { cursor: zoom-out; transition: none; }
@@ -430,7 +430,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rota
    Responsive
    ============================================================ */
 @media (max-width: 900px) {
-  .brand-text { display: none; }
+  .brand-text { font-size: 16px; }
   .nav-toggle { display: flex; }
   .site-nav {
     position: fixed; inset: 0; flex-direction: column; justify-content: center;
@@ -446,9 +446,13 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rota
 @media (max-width: 560px) {
   body { font-size: 16px; }
   .hero { padding-top: 24vh; }
-  .hero-scroll { display: none; }
+  .brand-text { font-size: 15px; }
+  .brand-mark { width: 36px; height: 36px; font-size: 19px; }
   .artist-stats { flex-wrap: wrap; gap: 22px 34px; }
   .footer-meta { flex-direction: column; }
+}
+@media (max-width: 360px) {
+  .brand-text { display: none; }
 }
 
 /* ============================================================
@@ -610,5 +614,16 @@ html.has-cursor .cursor-ring, html.has-cursor .cursor-dot { opacity: 1; }
 }
 @media (max-width: 480px) {
   .chip, .sort { font-size: 12px; padding: 9px 13px; }
+}
+@media (max-width: 540px) {
+  .lb-bar { gap: 2px; padding: 4px; max-width: calc(100vw - 16px); }
+  .lb-tool, .lb-close { width: 40px; height: 40px; }
+  .lb-tool svg, .lb-close { font-size: 22px; }
+  .lb-nav { width: 52px; height: 52px; font-size: 40px; }
+}
+@media (max-width: 380px) {
+  .lb-bar { gap: 0; padding: 3px; }
+  .lb-tool, .lb-close { width: 37px; height: 37px; }
+  .lb-tool svg { width: 16px; height: 16px; }
 }
 
